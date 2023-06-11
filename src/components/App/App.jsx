@@ -15,29 +15,26 @@ export default function App() {
   const [loadMore, setLoadMore] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchGallery = async () => {
-    try {
-      const { hits, totalHits } = await fetchImages(pageNumber, searchValue);
-
-      if (hits.length === 0) {
-        toast.error("Sorry, images not found... But you can try: 'Apple'");
-        return;
-      }
-
-      setImages(prevImages => [...prevImages, ...hits]);
-      setLoadMore(pageNumber < Math.ceil(totalHits / 12));
-
-      if (totalHits <= 12) {
-        toast("Oh, but that's all?! But you can try: 'Car'");
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchGallery = async () => {
+      try {
+        const { hits, totalHits } = await fetchImages(pageNumber, searchValue);
+        if (hits.length === 0) {
+          toast.error("Sorry, images not found... But you can try: 'Apple'");
+          return;
+        }
+        setImages(prevImages => [...prevImages, ...hits]);
+        setLoadMore(pageNumber < Math.ceil(totalHits / 12));
+        if (totalHits <= 12) {
+          toast("Oh, but that's all?! But you can try: 'Car'");
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     if (searchValue !== '') {
       fetchGallery();
     }
