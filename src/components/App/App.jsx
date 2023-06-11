@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
-import { Searchbar } from 'components/Searchbar/Searchbar';
-import { ImageGallery } from 'components/ImageGallery/ImageGallery';
+import Searchbar from 'components/Searchbar/Searchbar';
+import ImageGallery from 'components/ImageGallery/ImageGallery';
 
 import { BoxDiv } from './App.styled';
 import { fetchImages } from 'services/imageApi';
